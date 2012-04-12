@@ -22,8 +22,10 @@ Limitations
 ===========
 
 The code is currently hardcoded to fit the scaled image
-into a box as Aspect Fill. This is one of the first opportunities
-for improvement.
+into a box as Aspect Fill. This is one of the first 
+opportunities for improvement.
+
+Oh, and tests.
 
 
 Requires
