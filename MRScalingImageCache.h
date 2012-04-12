@@ -1,5 +1,5 @@
 //
-//  ThumbnailCache.h
+//  MRScalingImageCache.h
 //  Ones to Watch
 //
 //  Created by Michael Rhodes on 10/03/2012.
