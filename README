@@ -29,6 +29,11 @@ opportunities for improvement.
 
 Oh, and tests.
 
+It's written for ARC, which requires XCode 4.2.
+
+You can enable ARC for single files using the -fobjc-arc
+compiler flag in Target -> Build Phases -> Compile Sources.
+
 
 Requires
 ========
