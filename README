@@ -1,0 +1,18 @@
+MRScalingImageCache
+===================
+
+Downloads and stores images from URLs. Allows you to define
+named "scales" for different image sizes required by your
+app. You can then ask the cache for an image for a given
+URL and scale. The cache will create the size if needed,
+store it in the cache, and return the sized version. The
+next time you want the same scale, it's right there.
+
+This class was originally created to cache thumbnail
+images for use in a scrolling list view in my app
+One to Watch. Pre-scaling was essential for scrolling
+performance; resizing each time a row was displayed
+wasn't cutting it.
+
+The class allows cleanup by providing a list of URLs to
+keep -- all other cached images are discarded.
