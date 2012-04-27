@@ -1,7 +1,7 @@
 MRScalingImageCache
 ===================
 
-A Cocoa and iOS helpful image cache.
+A helpful image cache for iOS.
 
 Downloads and stores images from URLs. Allows you to define
 named "scales" for different image sizes required by your
