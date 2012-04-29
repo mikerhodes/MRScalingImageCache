@@ -34,8 +34,7 @@
 #import "MRScalingImageCache.h"
 
 #import "UIImage+Resize.h"
-#import "ASIHTTPRequest.h"
-#import "ASIDownloadCache.h"
+#import "AFNetworking.h"
 
 @implementation ScaleInfo
 
@@ -160,15 +159,13 @@
         //NSLog(@"Image not in cache; downloading...");
         // Get an image from the URL below
         
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-        [request setDownloadCache:[ASIDownloadCache sharedCache]];
-        [request setCacheStoragePolicy:ASICacheForSessionDurationCacheStoragePolicy];
-        [request setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
-        [request setSecondsToCache:60 * 5]; // Cache for 5 minutes
-        [request startSynchronous];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         
-        NSData *responseData = [request responseData];
+        [operation start];
+        [operation waitUntilFinished];
         
+        NSData *responseData = [operation responseData];
         UIImage *image = [[UIImage alloc] initWithData:responseData];
         
         //NSLog(@"%f,%f",image.size.width,image.size.height);
