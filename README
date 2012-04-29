@@ -38,11 +38,11 @@ compiler flag in Target -> Build Phases -> Compile Sources.
 Requires
 ========
 
-ASIHTTPRequest - http://allseeing-i.com/ASIHTTPRequest/
+AFNetworking
+- https://github.com/AFNetworking/AFNetworking/
 
 UIImage Extensions from:
-
-http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/
+- http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/
 
 
 Licence
