@@ -300,7 +300,7 @@
         nh = height;
         nw = ow * sf;
     } else {
-        float sf = height / ow;
+        float sf = width / ow;
         nh = oh * sf;
         nw = width;
     }
