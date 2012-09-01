@@ -124,7 +124,8 @@
     
     // Hash the URL to get our filename
     NSString *hashed_url = [self sha1:url];
-    NSString *hashed_filename = [NSString stringWithFormat:@"%@_%@.png", hashed_url, name];
+    NSString *scale_factor = [[UIScreen mainScreen] scale] == 2.f ? @"@2x" : @""; // we handle creating retina scaled images
+    NSString *hashed_filename = [NSString stringWithFormat:@"%@_%@%@.png", hashed_url, name, scale_factor];
     
     // Check for the filename in the cache
     NSString *cached_file_path = [storePath stringByAppendingPathComponent:hashed_filename];
@@ -182,13 +183,12 @@
 -(UIImage *)imageForURL:(NSString *)url
 {
     NSString *cached_file_path = [self _downloadImageToCacheForURL:url];
-    return [UIImage imageWithData:[NSData dataWithContentsOfFile:cached_file_path]];
+    return [UIImage imageWithContentsOfFile:cached_file_path];
 }
 
 -(UIImage *)imageFromCacheForURL:(NSString *)url
 {
     NSString *cached_file_path = [self _downloadPathForURL:url];
-    
     return [self _imageFromCacheForPath:cached_file_path];
 }
 
@@ -198,7 +198,9 @@
     BOOL available = [fileManager fileExistsAtPath:path];
     
     if (available) {
-        return [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        //NSLog(@"%@: %f", path, image.scale);
+        return image;
     } else {
         return nil;
     }
