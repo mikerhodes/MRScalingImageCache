@@ -167,11 +167,19 @@
         [operation waitUntilFinished];
         
         NSData *responseData = [operation responseData];
-        UIImage *image = [[UIImage alloc] initWithData:responseData];
+      
+        // In certain error states it is possible for response data to be nil.
+        // In this scenario, we assume that we should not cache the image to
+        // ensure we try again in the future.
+        if (responseData) {
+      
+            UIImage *image = [[UIImage alloc] initWithData:responseData];
         
-        //NSLog(@"%f,%f",image.size.width,image.size.height);
-        NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
-        [data1 writeToFile:cached_file_path atomically:YES];
+            //NSLog(@"%f,%f",image.size.width,image.size.height);
+            NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+            [data1 writeToFile:cached_file_path atomically:YES];
+          
+        }
     }
     else {
         //NSLog(@"Image found in cache");
