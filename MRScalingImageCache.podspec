@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/mikerhodes/MRScalingImageCache"
   s.license      = { :type => 'BSD', :file => 'LICENSE' }
   s.author       = "Michael Rhodes"
-  s.source       = { :git => "https://github.com/jbmorley/MRScalingImageCache.git", :commit => "ab251ffbf01093e6b70dd72f8c320075ca8339e1" }
+  s.source       = { :git => "https://github.com/jbmorley/MRScalingImageCache.git", :commit => "75596f5db5cd680dc6c3281062c47834bb7d8fe7" }
 
   s.source_files = 'Classes/*.{h,m}'
 
@@ -15,5 +15,6 @@ Pod::Spec.new do |s|
   s.platform = :ios, "6.0", :osx, "10.8"
 
   s.dependency 'AFNetworking', '~> 2.0'
+  s.dependency 'UIImage-Categories'
 
 end
