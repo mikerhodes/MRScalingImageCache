@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.platform = :ios, "6.0", :osx, "10.8"
 
   s.dependency 'AFNetworking', '~> 2.0'
-  s.dependency 'UIImage-Categories'
+  s.dependency 'UIImage-Categories', '~> 0.0.1'
 
 end
