@@ -34,7 +34,6 @@
 #import "MRScalingImageCache.h"
 
 #import "UIImage+Resize.h"
-#import "AFNetworking.h"
 
 @implementation ScaleInfo
 
@@ -134,6 +133,33 @@
 }
 
 
+/**
+ Make a synchronous request with NSURLSession
+ */
+-(NSData*)makeRequest:(NSURL*)url
+{
+    dispatch_semaphore_t latch = dispatch_semaphore_create(0);
+    __block NSData *responseData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:url
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error searching TMDb: %@", error);
+                } else {
+                    responseData = data;
+                }
+                
+                dispatch_semaphore_signal(latch);
+            }] resume];
+    dispatch_semaphore_wait(latch, dispatch_walltime(DISPATCH_TIME_NOW, 60 * NSEC_PER_SEC));
+    
+    return responseData;
+}
+
+
 -(NSString *)_downloadImageToCacheForURL:(NSString *)url
 {
     // Will download a file to the cache if not present
@@ -160,13 +186,7 @@
         //NSLog(@"Image not in cache; downloading...");
         // Get an image from the URL below
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        
-        [operation start];
-        [operation waitUntilFinished];
-        
-        NSData *responseData = [operation responseData];
+        NSData *responseData = [self makeRequest:[NSURL URLWithString:url]];
       
         // In certain error states it is possible for response data to be nil.
         // In this scenario, we assume that we should not cache the image to
